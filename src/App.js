@@ -6,8 +6,13 @@ export const ThemeContext = React.createContext();
 
 function App() {
   const [theme, setTheme] = useState('green');
+  const changeThemeBtnStyle =
+    theme === 'green'
+      ? { backgroundColor: 'red' }
+      : { backgroundColor: 'green' };
+  const txtColor = 'white';
   return (
-    <ThemeContext.Provider value={{ backgroundColor: theme }}>
+    <ThemeContext.Provider value={{ backgroundColor: theme, color: txtColor }}>
       <h2> CounterHooks</h2>
       <Counter initialCount={33}></Counter>
 
@@ -16,11 +21,7 @@ function App() {
       <br />
       <br />
       <button
-        style={
-          theme === 'green'
-            ? { backgroundColor: 'red' }
-            : { backgroundColor: 'green' }
-        }
+        style={{ color: 'white', ...changeThemeBtnStyle }}
         onClick={() =>
           setTheme((prevTheme) => {
             return prevTheme === 'red' ? 'green' : 'red';
