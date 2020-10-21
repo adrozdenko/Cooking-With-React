@@ -8,13 +8,22 @@ function App() {
   const [theme, setTheme] = useState('green');
   return (
     <ThemeContext.Provider value={{ backgroundColor: theme }}>
+      <h2> CounterHooks</h2>
       <Counter initialCount={33}></Counter>
-      <h1> Counter Hooks</h1>
+
+      <h2> Counter Hooks</h2>
       <CounterHooks initialCount={2}></CounterHooks>
+      <br />
+      <br />
       <button
+        style={
+          theme === 'green'
+            ? { backgroundColor: 'red' }
+            : { backgroundColor: 'green' }
+        }
         onClick={() =>
           setTheme((prevTheme) => {
-            return prevTheme === 'red' ? 'blue' : 'red';
+            return prevTheme === 'red' ? 'green' : 'red';
           })
         }>
         Toggle theme
