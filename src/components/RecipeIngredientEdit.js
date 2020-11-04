@@ -1,10 +1,23 @@
 import React from 'react';
 
-export default function RecipeIngredientEdit() {
+export default function RecipeIngredientEdit(props) {
+  const { ingredient, handleIngredientChange } = props;
+
+  function handleChange(changes) {
+    handleIngredientChange(ingredient.id, { ...ingredient, ...changes });
+  }
   return (
     <>
-      <input className='recipe-edit__input' />
-      <input className='recipe-edit__input' />
+      <input
+        className='recipe-edit__input'
+        defaultValue={ingredient.name}
+        onInput={(e) => handleChange({ name: e.target.value })}
+      />
+      <input
+        className='recipe-edit__input'
+        defaultValue={ingredient.amount}
+        onInput={(e) => handleChange({ amount: e.target.value })}
+      />
       <button className='btn btn--danger'>&times;</button>
     </>
   );
