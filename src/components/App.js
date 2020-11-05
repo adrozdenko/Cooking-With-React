@@ -8,7 +8,7 @@ export const RecipeContext = React.createContext();
 const LOCAL_STORAGE_KEY = 'cookingWithReact.recipes';
 
 function App() {
-  const [selectedRecipeId, setSelectedRecepieIs] = useState();
+  const [selectedRecipeId, setSelectedRecepieId] = useState();
   const [recipes, setRecipes] = useState(sampleRecipes);
   const selectedRecipe = recipes.find(
     (recipe) => recipe.id === selectedRecipeId
@@ -40,23 +40,26 @@ function App() {
   }
 
   function handleRecipeSelect(id) {
-    setSelectedRecepieIs(id);
+    setSelectedRecepieId(id);
   }
 
   function handleRecipeAdd() {
     const newRecipe = {
       id: uuidv4(),
-      name: 'New',
-      servings: 1,
-      cookTime: '1:00',
-      instructions: 'Instr.',
-      ingredients: [{ id: uuidv4(), name: 'Name', amount: '1 Tbs' }],
+      name: '',
+      servings: 0,
+      cookTime: '',
+      instructions: '',
+      ingredients: [{ id: uuidv4(), name: '', amount: '' }],
     };
-
+    setSelectedRecepieId(newRecipe.id);
     setRecipes([...recipes, newRecipe]);
   }
 
   function handleRecipeDelete(id) {
+    if (selectedRecipeId !== null && selectedRecipeId === id) {
+      setSelectedRecepieId(undefined);
+    }
     setRecipes(recipes.filter((recipe) => recipe.id !== id));
   }
 
